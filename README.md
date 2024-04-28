@@ -1,1 +1,2 @@
-# AI-Advanced
+# Advanced artificial intelligence - Step by step .
+
