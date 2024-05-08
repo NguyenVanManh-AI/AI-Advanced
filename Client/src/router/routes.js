@@ -13,6 +13,8 @@ import AdminLogin from '@/components/admin/auth/AdminLogin'
 import UserMain from '@/components/user/UserMain'
 import AccountSetting from '@/components/user/account-setting/AccountSetting'
 import FlowerRecognition from '@/components/user/flower-recognition/FlowerRecognition'
+import MultipleFlowerRecognition from '@/components/user/flower-recognition/MultipleFlowerRecognition'
+import IPMultipleFlowerRecognition from '@/components/user/flower-recognition/IPMultipleFlowerRecognition'
 import AlzheimersRecognition from '@/components/user/alzheimers-recognition/AlzheimersRecognition'
 import MemberAccount from '@/components/user/member-account/MemberAccount'
 import ManageContent from '@/components/user/manage-content/ManageContent'
@@ -70,6 +72,8 @@ const routes = [
         children: [
             { path: 'account-setting', name: 'AccountSetting', component: AccountSetting },
             { path: 'flower-recognition', name: 'FlowerRecognition', component: FlowerRecognition },
+            { path: 'flower-multiple-recognition', name: 'MultipleFlowerRecognition', component: MultipleFlowerRecognition },
+            { path: 'image-processing-flowers-recognition', name: 'IPMultipleFlowerRecognition', component: IPMultipleFlowerRecognition},
             { path: 'alzheimers-recognition', name: 'AlzheimersRecognition', component: AlzheimersRecognition },
             { path: 'member-account', name: 'MemberAccount', component: MemberAccount },
             { path: 'manage-content', name: 'ManageContent', component: ManageContent },
