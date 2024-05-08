@@ -38,6 +38,11 @@ import cv2
 from PIL import Image
 from tensorflow.keras.models import Model
 
+import tensorflow.keras.models as M
+import tensorflow.keras.layers as L
+import tensorflow.keras.backend as K
+import tensorflow.keras.callbacks as C
+
 class FlowerClassification(APIView):
     parser_classes = [MultiPartParser]
     loaded_best_model = joblib.load('./models/best_logistic_regression_model.pkl')
@@ -79,9 +84,9 @@ class FlowerClassification(APIView):
 
 class Alzheimer_s(APIView):
     parser_classes = [MultiPartParser]
-    loaded_model = joblib.load('models/best_model_TransferLearning_LogisticRegression_Alzheimer.pkl')
+    loaded_model = joblib.load('./models/alzheimer/local/best_model_TransferLearning_LogisticRegression_Alzheimer.pkl')
     classes = ['MildDemented', 'ModerateDemented', 'NonDemented', 'VeryMildDemented']
-    best_model_ConvNeXt = load_model('models/ConvNeXt_model-022.keras')
+    best_model_ConvNeXt = load_model('./models/alzheimer/local/ConvNeXt_model-022.keras')
     base_model = Model(inputs=best_model_ConvNeXt.input, outputs=best_model_ConvNeXt.layers[-3].output)
 
     def get(self, request):
@@ -127,4 +132,52 @@ class WebMining(APIView):
         }
         return Response(data, status=status.HTTP_200_OK)
     
-    
+
+# import efficientnet.tfkeras as efn
+
+class ImageProcessingFlower(APIView):
+    # parser_classes = [MultiPartParser]
+    # EfficientNetB6 = load_model('./models/xla/EfficientNet_model_step3.h5')
+    # GoogLeNet = load_model('./models/xla/final_best_gglenet_model.h5')
+    # flower_names = ['Great masterwort', 'Lenten rose', 'Sword lily', 'Oxeye daisy', 'Water lily', 'Rose', 'Thorn apple', 'Passion flower', 'Lotus lotus', 'Clematis', 'Columbine', 'Watercress', 'Canna lily', 'Camellia', 'Mallow']
+
+    def get(self, request):
+        data = {'message': 'GET request received!'}
+        return Response(data, status=status.HTTP_200_OK)
+
+    # def post(self, request):
+    #     if 'image_input' not in request.data:
+    #         return Response({'error': 'No image file found'}, status=status.HTTP_400_BAD_REQUEST)
+
+    #     image_data = request.FILES['image_input']
+    #     model_select = request.data['model_select']
+        
+    #     target_resize = (250, 250)
+    #     if model_select == 'googlenet': 
+    #         target_resize = (224,224)
+
+    #     list_image = []
+    #     nparr = np.fromstring(image_data.read(), np.uint8)
+    #     img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    #     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #     img = cv2.resize(img, target_resize)
+    #     img = img / 255.0
+    #     list_image.append(img)
+    #     list_image = np.array(list_image)
+
+    #     if model_select == 'googlenet': 
+    #         predicts_label = self.GoogLeNet.predict(list_image) 
+    #     else:
+    #         predicts_label = self.EfficientNetB6.predict(list_image) 
+
+    #     predicts_label = np.argmax(predicts_label, axis=1)
+    #     response_data = {
+    #         "data": {
+    #             "flowers_name": self.flower_names[predicts_label[0]]
+    #         },
+    #         "messages": [
+    #             "Successful flower identification !"
+    #         ],
+    #         "status": 200
+    #     }
+    #     return Response(response_data, status=status.HTTP_201_CREATED)
